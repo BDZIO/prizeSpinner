@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="th">
+<head> <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Mali:wght@300;400;500;600;700&display=swap" rel="stylesheet"> 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BYD Prize Winner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<button id="openSettings" class="settings-btn">⚙️ Settings</button>
+
+<div class="container">
+
+    <h1>BYD Prize Winner</h1>
+
+    <div class="slot-box" id="slotBox">
+        <div id="displayName">READY TO DRAW</div>
+    </div>
+
+    <div class="counter" id="counter">เหลือ 0 คน</div>
+
+    <button id="drawBtn" class="draw-btn">
+        DRAW
+    </button>
+
+</div>
+
+<div class="settings" id="settingsPanel">
+
+    <h2>Settings</h2>
+
+    <label>Name List</label>
+    <textarea id="nameList" rows="10"></textarea>
+
+    <label>Eliminated Label</label>
+    <input id="eliminatedLabel" value="ถูกคัดออก">
+
+    <label>Winner Label</label>
+    <input id="winnerLabel" value="ผู้ได้รับรางวัล">
+
+    <label>Loser Message</label>
+    <input id="loserMessage"
+        value="ขอแสดงความเสียใจกับผู้ที่ไม่ได้รับรางวัลในครั้งนี้">
+
+    <label>Winner Message</label>
+    <input id="winnerMessage"
+        value="ขอแสดงความยินดีกับผู้ได้รับรางวัล">
+
+    <div class="toggle">
+        <span>Enable Sound</span>
+        <input type="checkbox" id="soundToggle">
+    </div>
+
+    <button id="saveBtn">Save & Close</button>
+
+    <div class="history">
+        <h3>History</h3>
+        <ul id="historyList"></ul>
+    </div>
+
+</div>
+
+<div id="winnerModal" class="modal">
+    <div class="modal-content">
+        <div class="trophy">🏆</div>
+        <h2 id="winnerTitle"></h2>
+        <p id="winnerText"></p>
+        <button onclick="closeModal()">Close</button>
+    </div>
+</div>
+
+<canvas id="confetti"></canvas>
+
+<script src="app.js"></script>
+
+</body>
+</html>
