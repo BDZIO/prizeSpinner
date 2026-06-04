@@ -181,9 +181,8 @@ showWinner(names[0]);
 /* แสดงผู้ชนะ */
 function showWinner(name){
 
-document.getElementById("winnerTitle")
-.innerHTML =
-`{name} {document.getElementById("winnerLabel").value}`;
+document.getElementById("winnerTitle").innerHTML =
+`🏆 ${name} ${document.getElementById("winnerLabel").value}`;
 
 document.getElementById("winnerText")
 .innerHTML =
