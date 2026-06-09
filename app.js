@@ -35,7 +35,7 @@ async function draw(){
  const display=document.getElementById('displayName');
  for(let i=0;i<20;i++){
   display.innerText=names[Math.floor(Math.random()*names.length)];
-  await new Promise(r=>setTimeout(r,60));
+  await new Promise(r=>setTimeout(r,300));
  }
  if(names.length===1){
    const winner=names[0];
