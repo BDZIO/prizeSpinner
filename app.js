@@ -1,47 +1,53 @@
-let names=[];
-const $=id=>document.getElementById(id);
 
-function load(){
-$('nameList').value=localStorage.getItem('names')||'';
-loadNames();
-}
+let names=[];
+let rotated=false;
+
 function loadNames(){
-names=$('nameList').value.split('\n').map(v=>v.trim()).filter(Boolean);
-$('counter').textContent=`เหลือ ${names.length} คน`;
+ names=document.getElementById('nameList').value.split('\n').map(x=>x.trim()).filter(x=>x);
+ document.getElementById('counter').innerText=`เหลือ ${names.length} คน`;
 }
-$('openSettings').onclick=()=>$('settingsPanel').classList.add('open');
-$('saveBtn').onclick=()=>{
-localStorage.setItem('names',$('nameList').value);
-loadNames();
-$('settingsPanel').classList.remove('open');
+
+function loadSettings(){
+ document.getElementById('nameList').value=localStorage.getItem('namesInput')||'';
+ loadNames();
+}
+
+function saveSettings(){
+ localStorage.setItem('namesInput',document.getElementById('nameList').value);
+ loadNames();
+ document.getElementById('settingsPanel').classList.remove('open');
+}
+
+document.getElementById('openSettings').onclick=()=>document.getElementById('settingsPanel').classList.add('open');
+document.getElementById('saveBtn').onclick=saveSettings;
+
+document.getElementById('rotateBtn').onclick=()=>{
+ rotated=!rotated;
+ document.getElementById('appWrapper').classList.toggle('rotated');
+ document.getElementById('rotateBtn').innerText=rotated?'↩️ Normal':'🔄 Rotate';
 };
-$('fullscreenBtn').onclick=async()=>{
-if(!document.fullscreenElement) await document.documentElement.requestFullscreen();
-else await document.exitFullscreen();
-};
-$('rotateBtn').onclick=()=>alert('Rotate ใช้งานได้เฉพาะบางอุปกรณ์มือถือและ Browser ที่รองรับ');
-function closeModal(){$('winnerModal').style.display='none';}
+
+function closeModal(){document.getElementById('winnerModal').style.display='none';}
 window.closeModal=closeModal;
 
-$('drawBtn').onclick=async()=>{
-if(!names.length){alert('ไม่มีรายชื่อ');return;}
-for(let i=0;i<25;i++){
-$('displayName').textContent=names[Math.floor(Math.random()*names.length)];
-await new Promise(r=>setTimeout(r,60));
+async function draw(){
+ if(!names.length){alert('ไม่มีรายชื่อ');return;}
+ const display=document.getElementById('displayName');
+ for(let i=0;i<20;i++){
+  display.innerText=names[Math.floor(Math.random()*names.length)];
+  await new Promise(r=>setTimeout(r,60));
+ }
+ if(names.length===1){
+   const winner=names[0];
+   document.getElementById('winnerTitle').innerHTML=`🏆 ${winner} ${document.getElementById('winnerLabel').value}`;
+   document.getElementById('winnerText').innerHTML=document.getElementById('winnerMessage').value;
+   document.getElementById('winnerModal').style.display='flex';
+   return;
+ }
+ const idx=Math.floor(Math.random()*names.length);
+ const out=names.splice(idx,1)[0];
+ display.innerHTML=`❌ ${out} ${document.getElementById('eliminatedLabel').value}`;
+ document.getElementById('counter').innerText=`เหลือ ${names.length} คน`;
 }
-if(names.length===1){
-$('winnerTitle').textContent=`🏆 ${names[0]} ${$('winnerLabel').value}`;
-$('winnerModal').style.display='flex';
-$('drawBtn').disabled=true;
-$('drawBtn').textContent='FINISHED';
-return;
-}
-const idx=Math.floor(Math.random()*names.length);
-const out=names.splice(idx,1)[0];
-$('displayName').textContent=`❌ ${out} ${$('eliminatedLabel').value}`;
-$('counter').textContent=`เหลือ ${names.length} คน`;
-const li=document.createElement('li');
-li.textContent=$('displayName').textContent;
-$('historyList').prepend(li);
-};
-load();
+document.getElementById('drawBtn').onclick=draw;
+loadSettings();

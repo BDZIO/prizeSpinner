@@ -6,40 +6,43 @@
 <title>BYD Prize Winner</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Mali:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div id="appWrapper">
 <div class="top-controls">
-<button id="openSettings">⚙️ Settings</button>
-<button id="fullscreenBtn">📺 Fullscreen</button>
-<button id="rotateBtn">🔄 Rotate</button>
+<button id="openSettings" class="settings-btn">⚙️ Settings</button>
+<button id="rotateBtn" class="settings-btn">🔄 Rotate</button>
 </div>
 
 <div class="container">
 <h1>BYD Prize Winner</h1>
-<div class="slot-box"><div id="displayName">พร้อมใช้งาน</div></div>
-<div id="counter">เหลือ 0 คน</div>
-<button id="drawBtn">DRAW</button>
+<div class="slot-box"><div id="displayName">READY TO DRAW</div></div>
+<div class="counter" id="counter">เหลือ 0 คน</div>
+<button id="drawBtn" class="draw-btn">DRAW</button>
 </div>
 
 <div class="settings" id="settingsPanel">
-<h2>Settings</h2>
 <textarea id="nameList" rows="10"></textarea>
 <input id="eliminatedLabel" value="ถูกคัดออก">
 <input id="winnerLabel" value="ผู้ได้รับรางวัล">
+<input id="loserMessage" value="ขอแสดงความเสียใจกับผู้ที่ไม่ได้รับรางวัลในครั้งนี้">
+<input id="winnerMessage" value="ขอแสดงความยินดีกับผู้ได้รับรางวัล">
+<input type="checkbox" id="soundToggle">
 <button id="saveBtn">Save & Close</button>
-<h3>History</h3>
 <ul id="historyList"></ul>
 </div>
 
-<div class="modal" id="winnerModal">
+<div id="winnerModal" class="modal">
 <div class="modal-content">
 <div class="trophy">🏆</div>
 <h2 id="winnerTitle"></h2>
+<p id="winnerText"></p>
 <button onclick="closeModal()">Close</button>
 </div>
 </div>
+<canvas id="confetti"></canvas>
+</div>
 <script src="app.js"></script>
-</body>
-</html>
+</body></html>
